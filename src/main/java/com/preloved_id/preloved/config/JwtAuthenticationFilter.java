@@ -39,26 +39,41 @@ protected void doFilterInternal(
     System.out.println("========== JWT FILTER ==========");
     System.out.println("PATH : " + request.getRequestURI());
 
-    Cookie[] cookies = request.getCookies();
+    String authHeader = request.getHeader("Authorization");
 
-    if (cookies != null) {
+    if (authHeader != null && authHeader.startsWith("Bearer ")) {
 
-        System.out.println("COOKIE DITEMUKAN:");
+        token = authHeader.substring(7);
 
-        for (Cookie cookie : cookies) {
+        System.out.println("TOKEN DARI BEARER");
+    }
 
-            System.out.println(
-                    cookie.getName() + " = " + cookie.getValue()
-            );
+    if (token == null) {
 
-            if ("token".equals(cookie.getName())) {
-                token = cookie.getValue();
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+
+            System.out.println("COOKIE DITEMUKAN:");
+
+            for (Cookie cookie : cookies) {
+
+                System.out.println(
+                        cookie.getName() + " = " + cookie.getValue()
+                );
+
+                if ("token".equals(cookie.getName())) {
+
+                    token = cookie.getValue();
+
+                    System.out.println("TOKEN DARI COOKIE");
+                }
             }
+
+        } else {
+
+            System.out.println("TIDAK ADA COOKIE");
         }
-
-    } else {
-
-        System.out.println("TIDAK ADA COOKIE");
     }
 
     if (token == null) {

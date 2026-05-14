@@ -39,9 +39,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         .requestMatchers(
-                                "/api/auth/**",
-                                "/api/products/**"
+                                "/api/auth/**"
                         ).permitAll()
+
+                        .requestMatchers(
+                                "/api/products/**"
+                        ).authenticated()
 
                         .requestMatchers("/api/seller/**")
                         .hasRole("SELLER")
