@@ -1,10 +1,11 @@
 package com.preloved_id.preloved.model;
 
 import jakarta.persistence.Entity;
-
+import jakarta.persistence.PrimaryKeyJoinColumn;
 
 //entity digunakan untuk struktur program untuk match dengan db
 @Entity
+@PrimaryKeyJoinColumn(name = "user_id")
 public class Seller extends User {
 
     private String storeName;

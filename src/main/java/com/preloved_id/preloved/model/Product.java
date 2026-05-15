@@ -36,4 +36,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "seller_id")
     private Seller seller;
+
+    // OPTIMISTIC LOCKING
+    @Version
+    private Long version;
 }

@@ -1,10 +1,12 @@
+// repository/UserRepository.java
 package com.preloved_id.preloved.repository;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.preloved_id.preloved.model.User;
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
+@Repository
 public interface UserRepository extends JpaRepository<User, String> {
-    Optional<User> findByEmail(String email); //otomatis request query where email = ?
+    Optional<User> findByEmail(String email);
 }
